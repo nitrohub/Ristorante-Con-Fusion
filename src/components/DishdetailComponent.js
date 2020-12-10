@@ -5,25 +5,27 @@ import Menu from './MenuComponent';
 class Dishdetail extends Component{
     constructor(props){
         super(props);
-        this.state={
-            selectedDish : this.props.dish
-        };
     }
 
     renderDish(dish){
-        return(
-            
-                <div className="col-xs-12 col-sm-12 col-md-5 m-1">
-                    <Card>
-                    <CardImg width = "100%" object src={dish.image} alt={dish.name} />
-                            <CardBody>
-                                <CardTitle>{dish.name}</CardTitle>
-                                <CardText>{dish.description}</CardText>
-                            </CardBody>
-                    </Card>
-                    </div>
-            
-        );
+        if(dish!=null){
+            return(
+                    <div className="col-xs-12 col-sm-12 col-md-5 m-1">
+                        <Card>
+                        <CardImg width = "100%" object src={dish.image} alt={dish.name} />
+                                <CardBody>
+                                    <CardTitle>{dish.name}</CardTitle>
+                                    <CardText>{dish.description}</CardText>
+                                </CardBody>
+                        </Card>
+                        </div>
+                
+            );
+        }else{
+            return(
+                <div></div>
+            );
+        }
     }
 
     renderComments(comments){
@@ -32,7 +34,7 @@ class Dishdetail extends Component{
             return (
                 <ul className="list-unstyled">
                     <li>{comment.comment}</li>
-                    <li>-- {comment.author} , {comment.date}</li>
+                    <li>-- {comment.author} , {new Intl.DateTimeFormat('en-US', {year:'numeric', month:'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
                 </ul>
             )
         })
@@ -51,15 +53,21 @@ class Dishdetail extends Component{
         }
     }
     render(){
-        const dish = this.state.selectedDish;
         
-        return (
+        const dish = this.props.dish;
+        if(dish!=null){
+            return (
                 <div className="row">
-                    {this.renderDish(dish)}                      
-                    {this.renderComments(dish.comments)}
+                     {this.renderDish(dish)}                      
+                     {this.renderComments(dish.comments)}
                 </div>
             
         );
+        }else{
+            return (
+                <div></div>
+            )
+        }   
     }
 }
 
