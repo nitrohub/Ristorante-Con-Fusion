@@ -16,13 +16,13 @@ class Main extends Component{
 
   
   onDishSelect(dishId){
-    console.log("SElected Dish = "+dishId);
+    // console.log("Selected Dish = "+dishId);
     this.setState({ selectedDish: dishId });
 }
  
 render(){
   const disht = this.state.dishes.filter((dish)=> dish.id === this.state.selectedDish)[0];
-  console.log("Dish TV = ",disht);
+  // console.log("Dish TV = ",disht);
  return (
     <div className="App">
       <Navbar dark color="primary">
@@ -37,7 +37,4 @@ render(){
 }
 }
 export default Main;
-
-
-    //       
-    //      
+  

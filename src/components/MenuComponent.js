@@ -9,9 +9,9 @@ class Menu extends Component{
         console.log("Menu Component Constructor is invoked!");
     }
 
-    // componentDidMount(){
-    //     console.log("Menu Component componentDidMount constructor is invoked");
-    // }
+    componentDidMount(){
+        console.log("Menu Component componentDidMount constructor is invoked");
+    }
 
 
     // renderDish(dish){

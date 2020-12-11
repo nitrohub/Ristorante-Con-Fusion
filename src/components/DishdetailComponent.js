@@ -3,15 +3,20 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'rea
 import Menu from './MenuComponent';
 
 class Dishdetail extends Component{
-    constructor(props){
-        super(props);
+
+    componentDidMount(){
+        console.log("DishDetailComponent componentDidMount constructor is invoked");
+    }
+
+    componentDidUpdate(){
+        console.log("DishDetailComponent componentDidUpdate constructor is updated");
     }
 
     renderDish(dish){
         if(dish!=null){
             return(
                     <div className="col-xs-12 col-sm-12 col-md-5 m-1">
-                        <Card>
+                        <Card key={dish.id}>
                         <CardImg width = "100%" object src={dish.image} alt={dish.name} />
                                 <CardBody>
                                     <CardTitle>{dish.name}</CardTitle>
@@ -54,6 +59,8 @@ class Dishdetail extends Component{
     }
     render(){
         
+
+        console.log("Render method is called inside DishDetail");
         const dish = this.props.dish;
         if(dish!=null){
             return (
