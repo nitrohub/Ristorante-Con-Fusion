@@ -1,18 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from 'reactstrap';
 import Menu from './MenuComponent';
 
-class Dishdetail extends Component{
 
-    componentDidMount(){
-        console.log("DishDetailComponent componentDidMount constructor is invoked");
-    }
-
-    componentDidUpdate(){
-        console.log("DishDetailComponent componentDidUpdate constructor is updated");
-    }
-
-    renderDish(dish){
+      function RenderDish({dish}){ //if we don't receive it inside the curly braces then it would be received as a prop
         if(dish!=null){
             return(
                     <div className="col-xs-12 col-sm-12 col-md-5 m-1">
@@ -33,7 +24,7 @@ class Dishdetail extends Component{
         }
     }
 
-    renderComments(comments){
+    function RenderComments({comments}){
 
         const comment = comments.map((comment)=>{
             return (
@@ -57,16 +48,15 @@ class Dishdetail extends Component{
             )
         }
     }
-    render(){
-        
-
-        console.log("Render method is called inside DishDetail");
-        const dish = this.props.dish;
+    
+    const DishDetail = (props)=>{
+        // console.log("Render method is called inside DishDetail");
+        const dish = props.dish;
         if(dish!=null){
             return (
                 <div className="row">
-                     {this.renderDish(dish)}                      
-                     {this.renderComments(dish.comments)}
+                     <RenderDish dish={dish} />                      
+                     <RenderComments comments = {dish.comments} />
                 </div>
             
         );
@@ -76,6 +66,6 @@ class Dishdetail extends Component{
             )
         }   
     }
-}
 
-export default Dishdetail;
+
+export default DishDetail;
