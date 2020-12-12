@@ -7,7 +7,6 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
     function RenderMenuItem({ dish, onClick }) {  //We can also send the props over here as well and we can also receive them as a json object
         return(
             <Card onClick = {() => onClick(dish.id)}>
-                {/* <h1>Working!</h1> */}
                  <CardImg width = "100%" src={dish.image} alt={dish.name} />
                  <CardImgOverlay className="ml-5">
                      <CardTitle>{dish.name}</CardTitle>
