@@ -1,37 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-
-function Footer(props){
-    return (
-        <div className="footer">
+function Footer(props) {
+    return(
+    <div className="footer">
         <div className="container">
             <div className="row justify-content-center">             
                 <div className="col-4 offset-1 col-sm-2">
                     <h5>Links</h5>
                     <ul className="list-unstyled">
-                        <li>
-                            <Link to="/home">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/aboutus">About Us</Link>
-                        </li>
-                        <li>
-                            <Link to="/contactus">contactus</Link>
-                        </li>
-                        <li>
-                            <Link to="/menu">Menu</Link>
-                        </li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="contactus.html">Contact</a></li>
                     </ul>
                 </div>
                 <div className="col-7 col-sm-5">
                     <h5>Our Address</h5>
                     <address>
-		              121, Clear Water Bay Road<br />
-		              Clear Water Bay, Kowloon<br />
-		              HONG KONG<br />
-		              <i className="fa fa-phone fa-lg"></i>: +852 1234 5678<br />
-		              <i className="fa fa-fax fa-lg"></i>: +852 8765 4321<br />
+                        121, Abc def ghi jkl<br />
+                        Abc def ghi, mno<br />
+                        INDIA<br />
+		              <i className="fa fa-phone fa-lg"></i>: +91 01234 56789<br />
+		              <i className="fa fa-fax fa-lg"></i>: +91 98765 43210<br />
 		              <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:confusion@food.net">
                          confusion@food.net</a>
                     </address>
@@ -54,7 +44,7 @@ function Footer(props){
             </div>
         </div>
     </div>
-    );
+    )
 }
 
 export default Footer;
