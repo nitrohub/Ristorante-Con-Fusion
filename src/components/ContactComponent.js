@@ -3,14 +3,19 @@ import {Breadcrumb, Button, BreadcrumbItem, Label, Row, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length<=len);
+const minLength = (len) => (val) => (val) && (val.length>=len);
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+
+
 //state and handleInputChange will be automatically managed by redux
 class Contact extends Component {
 
     constructor(props){
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleInputChange = this.handleInputChange.bind(this);
-        // this.handleBlur = this.handleBlur.bind(this);
     }
 
     
@@ -109,6 +114,19 @@ class Contact extends Component {
                         <Col md={10}>  {/*md is for Colspan*/}
                             <Control.text model=".firstname" id="firstname" name="firstname" placeholder="First Name"
                             className="form-control"
+                            validators = {{
+                                required, minLength:minLength(3), maxLength: maxLength(15)
+                            }}
+                            />
+                            <Errors 
+                            className ="text-danger"
+                            model=".firstname"
+                            show="touched"
+                            messages={{
+                                required: 'Required',
+                                minLength: 'Must be greater than 2 characters',
+                                maxLength: 'Must be less than or equal to 15 characters'
+                            }}
                             />
                         </Col>
                     </Row>
@@ -117,14 +135,41 @@ class Contact extends Component {
                             <Col md={10}>
                                 <Control.text model=".lastname" id="lastname" name="lastname" placeholder="Last Name"
                                 className="form-control"
+                                validators = {{
+                                    required, minLength:minLength(3), maxLength: maxLength(15)
+                                }}
                                 />
+                                <Errors 
+                            className ="text-danger"
+                            model=".lastname"
+                            show="touched"
+                            messages={{
+                                required: 'Required',
+                                minLength: 'Must be greater than 2 characters',
+                                maxLength: 'Must be less than or equal to 15 characters'
+                            }}
+                            />
                             </Col>
                     </Row>
                     <Row className="form-group">
                         <Label md={2} htmlFor="telnum">Phone</Label>
                         <Col md={10}>
                             <Control.text model=".telnum" id="telnum" name="telnum" placeholder="Phone Number" 
-                            className="form-control"                            
+                            className="form-control"   
+                            validators = {{
+                                required, minLength:minLength(3), maxLength: maxLength(15), isNumber
+                            }}                         
+                            />
+                            <Errors 
+                            className ="text-danger"
+                            model=".telnum"
+                            show="touched"
+                            messages={{
+                                required: 'Required',
+                                minLength: 'Must be greater than 2 numbers',
+                                maxLength: 'Must be less than or equal to 15 numbers',
+                                isNumber : 'Must be a number'
+                            }}
                             />
                         </Col>
                     </Row>
@@ -133,6 +178,18 @@ class Contact extends Component {
                         <Col md={10}>
                             <Control.text model=".email" id="email" name="email" placeholder="Email"
                             className="form-control"
+                            validators = {{
+                                required, validEmail
+                            }}   
+                            />
+                            <Errors 
+                            className ="text-danger"
+                            model=".email"
+                            show="touched"
+                            messages={{
+                                required: 'Required',
+                                validEmail: 'Invalid email Address'
+                            }}
                             />
                         </Col>
                     </Row>
