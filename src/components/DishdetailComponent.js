@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
 import { Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import CommentForm from './CommentForm';
 
 function RenderDish({dish}){
         if (dish != null) {
@@ -47,6 +48,7 @@ function RenderDish({dish}){
                     <ul className='list-unstyled'>
                         {comment}
                     </ul>
+                    <CommentForm />
             </div>
         )
     }
@@ -73,6 +75,7 @@ function RenderDish({dish}){
                     <RenderDish dish = {props.dish} />
                     <RenderComments comments = {props.comments} />
                 </div>
+
             </div>
         )
     }
