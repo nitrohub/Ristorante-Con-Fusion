@@ -14,7 +14,7 @@ constructor(props){
         }
     };
     
-    this.handleComment = this.handleComment.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -63,9 +63,11 @@ toggleNav(){
 }
 
 handleSubmit(values) {
-    console.log('Current State is: ' + JSON.stringify(values));
-    alert('Current State is: ' + JSON.stringify(values));
-    this.props.resetFeedbackForm();
+    this.toggleModal();
+    this.props.postComment(this.props.dishId,values.rating,values.author,values.comment);
+    // console.log('Current State is: ' + JSON.stringify(values));
+    // alert('Current State is: ' + JSON.stringify(values));
+    // this.props.resetFeedbackForm();
     // event.preventDefault();
 }
 
@@ -79,7 +81,7 @@ render(){
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
             <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
             <ModalBody>
-                <Form onSubmit={(values) => this.handleComment(values)}>
+                <Form onSubmit={(values) => this.handleSubmit(values)}>
                     <FormGroup>
                         <Label htmlFor="rating">Rating</Label>
                         <Input type="number" id="rating" name="rating"
