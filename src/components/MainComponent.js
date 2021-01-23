@@ -40,26 +40,28 @@ class MainComponent extends Component {
         this.props.fetchComments();
         this.props.fetchPromos();
     }
-    // onDishSelect(dishId) {
-    //     this.setState({
-    //         selectedDish: dishId
-    //     });
-    // }
-
+    
 
     render() {
 
         const HomePage = () => {
+            console.log("Homepage Dishes = ",this.props.dishes);
             return(
                 // extract all dishes where featured is true and filter will return an array hence index zero is mentioned
-                <Home 
-                dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
+                <Home
                 dishesLoading={this.props.dishes.isLoading}
+                
+                dish = {this.props.dishes.dishes.filter((dish)=> dish.featured)[0]}
+
                 dishErrMess={this.props.dishes.errMess}
+                
                 promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
+                
                 promoLoading={this.props.promotions.isLoading}
+                
                 promoErrMess={this.props.promotions.errMess}
-                leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+
+                leader = {this.props.leaders.filter((leader)=>leader.featured)[0]}
                 />
             );
         }

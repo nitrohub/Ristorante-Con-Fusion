@@ -8,8 +8,12 @@ export const Promotions = (state = {isLoading:true,
             return {...state, isLoading:false,errMess:null,promotions:action.payload};
         case ActionTypes.PROMOS_LOADING:
             return {...state,isLoading:true,errMess:null,promotions:[]}
-        case ActionTypes.PROMOS_FAILED:
-            return{...state,isLoading:false,errMess:action.payload,promotions:[]};
+        case ActionTypes.PROMOS_FAILED:{
+            console.log("Inside the Last one = ",state);
+            return {...state,isLoading:false,errMess:action.payload,promotions:[]};
+        }
+
+            
         default:
             return state;
     }
