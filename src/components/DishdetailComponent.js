@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import CommentForm from './CommentForm';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({dish}){
         if(Loading.isLoading){
@@ -28,6 +29,11 @@ function RenderDish({dish}){
         }else if(dish != null) {
             return (
                 <div className='col-12 col-md-5 m-1'>
+                     <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
                     <Card>
                     <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
@@ -35,6 +41,7 @@ function RenderDish({dish}){
                             <CardText>{dish.description}</CardText>
                         </CardBody>
                     </Card>
+                    </FadeTransform>
                 </div>
             )
         }
@@ -47,26 +54,32 @@ function RenderDish({dish}){
         if (comments == null) {
             return (<div></div>)
         }
-        const comment = comments.map(cmnt => {
-            return (
-                <li key={cmnt.id}>
-                    <p>{cmnt.comment}</p>
-                    <p>-- {cmnt.author},
-                    &nbsp;
-                    {new Intl.DateTimeFormat('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: '2-digit'
-                        }).format(new Date(cmnt.date))}
-                    </p>
-                </li>
-            )
-        })
+
+        
+        
         return (
             <div className='col-12 col-md-5 m-1'>
                 <h4> Comments </h4>
                     <ul className='list-unstyled'>
-                        {comment}
+                        <Stagger in>
+                        {comments.map(cmnt => {
+                            return (
+                                <Fade in>
+                                <li key={cmnt.id}>
+                                    <p>{cmnt.comment}</p>
+                                    <p>-- {cmnt.author},
+                                    &nbsp;
+                                    {new Intl.DateTimeFormat('en-US', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: '2-digit'
+                                        }).format(new Date(cmnt.date))}
+                                    </p>
+                                </li>
+                                </Fade>
+                            );
+                        })}
+                        </Stagger>
                     </ul>
                     <CommentForm dishId={dishId} postComment={postComment}/>
             </div>
