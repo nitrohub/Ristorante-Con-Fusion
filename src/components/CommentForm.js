@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form , FormGroup, FormFeedback,Label, Input} from 'reactstrap';
 
-
 class CommentForm extends Component{
-
-
 
 constructor(props){
     super(props);
@@ -65,11 +62,11 @@ toggleNav(){
     });
 }
 
-handleComment(event){
-    this.toggleModal();
-    console.log("Login Alert!");
-    alert("Rating : "+this.rating.value+" Name : "+this.author.value+" Comment : "+this.comment.value);
-    event.preventDefault();
+handleSubmit(values) {
+    console.log('Current State is: ' + JSON.stringify(values));
+    alert('Current State is: ' + JSON.stringify(values));
+    this.props.resetFeedbackForm();
+    // event.preventDefault();
 }
 
 
@@ -82,7 +79,7 @@ render(){
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
             <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
             <ModalBody>
-                <Form onSubmit={this.handleComment}>
+                <Form onSubmit={(values) => this.handleComment(values)}>
                     <FormGroup>
                         <Label htmlFor="rating">Rating</Label>
                         <Input type="number" id="rating" name="rating"
